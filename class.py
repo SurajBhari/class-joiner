@@ -11,7 +11,7 @@ login_url = "https://studybase.in/login"
 live_stream_url = "https://studybase.in/student/live-stream"
 gecko_location = r"r"
 webhook_url = ""
-me_mention = "<@355658987372281856>"
+content = "<@355658987372281856>"
 
 driver = webdriver.Firefox(executable_path=gecko_location)
 
