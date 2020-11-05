@@ -9,7 +9,7 @@ user_name = ""
 password = ""
 login_url = "https://studybase.in/login"
 live_stream_url = "https://studybase.in/student/live-stream"
-gecko_location = r"r"
+gecko_location = r""
 webhook_url = ""
 content = "<@355658987372281856>"
 
