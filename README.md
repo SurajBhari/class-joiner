@@ -10,7 +10,7 @@ It works in this manner
 - In end. send a discord webhook with information
 
 # Demonstration
-https://www.youtube.com/rfjReiZEkLU
+https://www.youtube.com/watch?v=rfjReiZEkLU
 
 # How to use it ?
 Make this clear. This is not made for everyone to use. nor can everyone use this. you must have a account in studybase.in provided by the school.
