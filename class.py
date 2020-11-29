@@ -111,7 +111,7 @@ def failed():
     embed.add_field(name="Subject", value=subject)
     embed.add_field(name="By", value=by)
     
-    webhook.send(content= me_mention, embed=embed)
+    webhook.send(content= content, embed=embed)
     sys.exit()
 
 try:
