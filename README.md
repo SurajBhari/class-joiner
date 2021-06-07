@@ -3,7 +3,7 @@ This is a script that I use to join my online class automatically.
 It works in this manner
 - It goes to the website
 - Goes to login page
-- login in
+- log in
 - go to live stream page
 - join the class
 - retry for sometime in case of a failure 
