@@ -31,7 +31,7 @@ time.sleep(5.0)
 
 
 driver.get(url=live_stream_url)
-time.sleep(5.0) # Random delay for Table to get rendered
+time.sleep(5.0)  # Random delay for Table to get rendered
 
 try:
     stream = driver.find_element_by_xpath("//table[@id='studentsTable']/tbody/tr[1]")
@@ -39,7 +39,6 @@ except selenium.common.exceptions.NoSuchElementException:
     exit()
 else:
     pass
-
 
 
 classtime = stream.find_element_by_xpath("//td[1]").text
@@ -51,27 +50,24 @@ join = stream.find_element_by_xpath("//td[7]/span/a")
 
 join.click()
 
+
 def success():
     webhook = Webhook.from_url(webhook_url, adapter=RequestsWebhookAdapter())
-    embed = Embed(
-        color = 0x00ff00,
-        title= "Success"
-    )
+    embed = Embed(color=0x00FF00, title="Success")
     embed.add_field(name="ClassTime", value=classtime)
     embed.add_field(name="Date", value=date)
     embed.add_field(name="Duration", value=duration)
     embed.add_field(name="Subject", value=subject)
     embed.add_field(name="By", value=by)
-    
-    webhook.send(content= me_mention, embed=embed)
+
+    webhook.send(content=me_mention, embed=embed)
     sys.exit()
 
 
-
-time.sleep(15) # 15 seconds delay cuz why not ?
+time.sleep(15)  # 15 seconds delay cuz why not ?
 
 try:
-    audio = driver.find_elements_by_class_name("join-audio-by-voip") 
+    audio = driver.find_elements_by_class_name("join-audio-by-voip")
     if not audio:
         raise selenium.common.exceptions.NoSuchElementException()
 except selenium.common.exceptions.NoSuchElementException:
@@ -82,13 +78,13 @@ else:
 
 
 for x in range(15):
-    #Try refreshing to try getting in class for 15 minute
+    # Try refreshing to try getting in class for 15 minute
     print(f"{x} Retries done")
     time.sleep(60)
     driver.refresh()
     time.sleep(15)
     try:
-        audio = driver.find_elements_by_class_name("join-audio-by-voip") 
+        audio = driver.find_elements_by_class_name("join-audio-by-voip")
         if not audio:
             raise selenium.common.exceptions.NoSuchElementException()
     except selenium.common.exceptions.NoSuchElementException:
@@ -97,22 +93,18 @@ for x in range(15):
         success()
 
 
-
 def failed():
     webhook = Webhook.from_url(webhook_url, adapter=RequestsWebhookAdapter())
-    embed = Embed(
-        color = 0xff0000,
-        title= title,
-        description= content
-    )
+    embed = Embed(color=0xFF0000, title=title, description=content)
     embed.add_field(name="ClassTime", value=classtime)
     embed.add_field(name="Date", value=date)
     embed.add_field(name="Duration", value=duration)
     embed.add_field(name="Subject", value=subject)
     embed.add_field(name="By", value=by)
-    
-    webhook.send(content= content, embed=embed)
+
+    webhook.send(content=content, embed=embed)
     sys.exit()
+
 
 try:
     content = driver.find_elements_by_class_name("zm-modal-body-content")
@@ -128,8 +120,7 @@ try:
         title = title.text
 except selenium.common.exceptions.NoSuchElementException:
     content = "Unknown Error"
-    title= "Unknown Error"
+    title = "Unknown Error"
 else:
     failed()
 failed()
-
