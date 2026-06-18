@@ -1,4 +1,9 @@
 # class-joiner
+
+![Python](https://img.shields.io/badge/Python-3670A0?style=flat&logo=python&logoColor=ffdd54)
+![Selenium](https://img.shields.io/badge/Selenium-43B02A?style=flat&logo=selenium&logoColor=white)
+![Discord](https://img.shields.io/badge/Discord_alerts-5865F2?style=flat&logo=discord&logoColor=white)
+
 This is a script that I use to join my online class automatically. 
 It works in this manner
 - It goes to the website
