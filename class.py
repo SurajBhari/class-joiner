@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.service import Service
 import time
 import selenium
 from discord import Webhook, RequestsWebhookAdapter, Embed
@@ -13,18 +15,18 @@ gecko_location = r""
 webhook_url = ""
 content = "<@355658987372281856>"
 
-driver = webdriver.Firefox(executable_path=gecko_location)
+service = Service(executable_path=gecko_location) if gecko_location else None
+driver = webdriver.Firefox(service=service)
 
 driver.get(url=login_url)
 
 time.sleep(5.0)
 
-mobile_element = driver.find_element_by_id(id_="Mobile")
-password_element = driver.find_element_by_id(id_="Password")
-login_button = driver.find_element_by_id(id_="submitForm")
+mobile_element = driver.find_element(By.ID, "Mobile")
+password_element = driver.find_element(By.ID, "Password")
+login_button = driver.find_element(By.ID, "submitForm")
 mobile_element.send_keys(user_name)
 password_element.send_keys(password)
-driver.find_elements_by_class_name
 login_button.click()
 
 time.sleep(5.0)
@@ -34,19 +36,19 @@ driver.get(url=live_stream_url)
 time.sleep(5.0)  # Random delay for Table to get rendered
 
 try:
-    stream = driver.find_element_by_xpath("//table[@id='studentsTable']/tbody/tr[1]")
+    stream = driver.find_element(By.XPATH, "//table[@id='studentsTable']/tbody/tr[1]")
 except selenium.common.exceptions.NoSuchElementException:
     exit()
 else:
     pass
 
 
-classtime = stream.find_element_by_xpath("//td[1]").text
-date = stream.find_element_by_xpath("//td[2]").text
-duration = stream.find_element_by_xpath("//td[3]").text
-subject = stream.find_element_by_xpath("//td[5]").text
-by = stream.find_element_by_xpath("//td[6]").text
-join = stream.find_element_by_xpath("//td[7]/span/a")
+classtime = stream.find_element(By.XPATH, "//td[1]").text
+date = stream.find_element(By.XPATH, "//td[2]").text
+duration = stream.find_element(By.XPATH, "//td[3]").text
+subject = stream.find_element(By.XPATH, "//td[5]").text
+by = stream.find_element(By.XPATH, "//td[6]").text
+join = stream.find_element(By.XPATH, "//td[7]/span/a")
 
 join.click()
 
@@ -67,7 +69,7 @@ def success():
 time.sleep(15)  # 15 seconds delay cuz why not ?
 
 try:
-    audio = driver.find_elements_by_class_name("join-audio-by-voip")
+    audio = driver.find_elements(By.CLASS_NAME, "join-audio-by-voip")
     if not audio:
         raise selenium.common.exceptions.NoSuchElementException()
 except selenium.common.exceptions.NoSuchElementException:
@@ -84,7 +86,7 @@ for x in range(15):
     driver.refresh()
     time.sleep(15)
     try:
-        audio = driver.find_elements_by_class_name("join-audio-by-voip")
+        audio = driver.find_elements(By.CLASS_NAME, "join-audio-by-voip")
         if not audio:
             raise selenium.common.exceptions.NoSuchElementException()
     except selenium.common.exceptions.NoSuchElementException:
@@ -107,13 +109,13 @@ def failed():
 
 
 try:
-    content = driver.find_elements_by_class_name("zm-modal-body-content")
+    content = driver.find_elements(By.CLASS_NAME, "zm-modal-body-content")
     if type(content) == list:
         content = content[0].text
     else:
         content = content.text
 
-    title = driver.find_element_by_class_name("zm-modal-body-title")
+    title = driver.find_element(By.CLASS_NAME, "zm-modal-body-title")
     if type(title) == list:
         title = title[0].text
     else:
